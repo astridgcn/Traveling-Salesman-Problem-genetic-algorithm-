@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Dec  8 10:51:51 2020
-
-@author: As
-"""
 from random import shuffle
 import random
 from math import *
