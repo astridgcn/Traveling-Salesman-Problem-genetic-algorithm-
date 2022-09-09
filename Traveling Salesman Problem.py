@@ -1,28 +1,56 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Sep 07 21:28:54 2022
+
+@author: As
+"""
+
+# Remarques :
+# - Ce code n'est pas le plus optimisé, mais il est suffisamment simple pour illustrer le principe de l'algorithme.
+# - Ne gère par les erreurs d'input (variables initialement initialisées directement dans le code) : 
+#       Saisie de texte au lieu de nombres.
+#       Nombres incohérents (du style créer 20 villes avec minimum 100km entre chaque et vouloir parcourir uniquement 100km).
+#       Etc.
+# - Pourrait proposer de créer une fonction qui prend en entrée une liste de villes et qui renvoie une liste de distances.
+# - Ne gère pas le programme qui tourne en boucle (distance à atteindre trop petite par rapport aux distances).
+# - On pourrait proposer une distance maximale en fonction des distances générées par exemple.
+
+# N'hésitez pas à proposer des améliorations et/ou extensions !
+
+# ----------------- LIBRAIRIES -----------------
+
 from random import shuffle
 import random
 from math import *
 
 # ----------------- INITIALISATIONS -----------------
-goal = 3450 #distance max que l'on veut parcourir
+print("Distance maximale que vous souhaitez parcourir : ")
+goal = int(input())
+# goal = 3400
 
-# Distances
+# Distances entre les villes
+print("Nombre de villes que vous souhaitez visiter : ")
+N = int(input())
+# N = 15
+N_cell = N*N #Nombre cases tableau
 
-N = 15 #nombre de villes
-N_cell = N*N #nb cases tableau
+dist = [[0 for _ in range(N)] for _ in range(N)] #crée la matrice et la remplit diste 0
 
-d = [[0 for _ in range(N)] for _ in range(N)] #crée la matrice et la remplit de 0
-
-c = 100 #créer des distances
+print("Distance minimale entre les villes que vous souhaitez créer : ")
+c = int(input())
+# c = 100
 for i in range (N) :
     for j in range (N) :
         c += 1
-        d[i][j] = d[j][i]
+        dist[i][j] = dist[j][i]
         if i != j : #remplit les distances sauf la diagonale
-            d[i][j] = c 
-            d[j][i] = d[i][j]
+            dist[i][j] = c 
+            dist[j][i] = dist[i][j]
             
 # Individus 
-In = 100 #nombre d'individus
+print("Nombre d'individus dans chaque génération : ")
+In = int(input()) #nombre d'individus
+# In = 100
 Ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] 
 
 # Population
@@ -38,7 +66,9 @@ NewPop = [[0 for _ in range(N)] for _ in range(In)]
 
 # Fitness
 Fitness = [[0 for _ in range(2)] for _ in range(In)] #liste avec indice individu et sa fitness (inutile car on a l'indice avec i mais utile quand on ordonne)
-En = 10 #nombre d'individus faisant partie de l'élite (les 10 meilleurs pour la fitness)
+print("Nombre d'individus à conserver : ")
+# En = 10
+En = int(input()) #nombre d'individus faisant partie de l'élite (les meilleurs pour la fitness)
 
 # ----------------- FONCTIONS -----------------
 def affiche_distance (liste) :
@@ -63,7 +93,7 @@ def affiche_individu (liste) :
     print("\n")  
     
 # ----------------- DEBUT -----------------
-affiche_distance(d)
+affiche_distance(dist)
 affiche_individu(Pop)
 
 g = 0 #nb génération
@@ -85,8 +115,8 @@ while min >= goal :
             if j!= N-1 :
                 n = Pop[i][j] 
                 p = Pop[i][j+1]
-                fitness += d[n][p]
-        fitness += d[Pop[i][N-1]][Pop[i][0]]
+                fitness += dist[n][p]
+        fitness += dist[Pop[i][N-1]][Pop[i][0]]
         Fitness[i][0] = fitness
         Fitness[i][1] = i
         #print ("Fitness individu", i, " : ", fitness) 
