@@ -34,7 +34,7 @@ N = int(input())
 # N = 15
 N_cell = N*N #Nombre cases tableau
 
-dist = [[0 for _ in range(N)] for _ in range(N)] #crée la matrice et la remplit diste 0
+dist = [[0 for _ in range(N)] for _ in range(N)] #crée la matrice et la remplit de 0
 
 print("Distance minimale entre les villes que vous souhaitez créer : ")
 c = int(input())
