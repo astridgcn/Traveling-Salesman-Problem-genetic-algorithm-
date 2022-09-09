@@ -51,8 +51,8 @@ for i in range (N) :
 print("Nombre d'individus dans chaque génération : ")
 In = int(input()) #nombre d'individus
 # In = 100
-Ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] 
-
+Ind = list(range(0,N)) #individu parcourant les n villes dans l'ordre
+# Ind = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14] 
 # Population
 Pop = []
    
@@ -67,8 +67,8 @@ NewPop = [[0 for _ in range(N)] for _ in range(In)]
 # Fitness
 Fitness = [[0 for _ in range(2)] for _ in range(In)] #liste avec indice individu et sa fitness (inutile car on a l'indice avec i mais utile quand on ordonne)
 print("Nombre d'individus à conserver : ")
-# En = 10
 En = int(input()) #nombre d'individus faisant partie de l'élite (les meilleurs pour la fitness)
+# En = 10
 
 # ----------------- FONCTIONS -----------------
 def affiche_distance (liste) :
